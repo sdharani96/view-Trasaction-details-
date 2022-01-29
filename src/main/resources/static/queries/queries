@@ -1,0 +1,47 @@
+-- Table: product.category
+
+-- DROP TABLE product.category;
+
+CREATE TABLE product.category
+(
+    category_id integer NOT NULL,
+    categoryname character varying(30) COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT category_pkey PRIMARY KEY (category_id),
+    CONSTRAINT uk29gntjt80v5dpmg9ejhxq1cl6 UNIQUE (categoryname),
+    CONSTRAINT uk_29gntjt80v5dpmg9ejhxq1cl6 UNIQUE (categoryname)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE product.category
+    OWNER to postgres;
+    
+    
+    -- Table: product.products
+
+-- DROP TABLE product.products;
+
+CREATE TABLE product.products
+(
+    product_id integer NOT NULL,
+    pcode character varying(255) COLLATE pg_catalog."default",
+    pname character varying(255) COLLATE pg_catalog."default",
+    price integer NOT NULL,
+    status character varying(255) COLLATE pg_catalog."default",
+    pdescription character varying(255) COLLATE pg_catalog."default",
+    category_id integer,
+    CONSTRAINT products_pkey PRIMARY KEY (product_id),
+    CONSTRAINT fk_category_id FOREIGN KEY (category_id)
+        REFERENCES product.category (category_id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE product.products
+    OWNER to postgres;
